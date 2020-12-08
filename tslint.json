@@ -1,0 +1,15 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint:recommended"],
+    "jsRules": {
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"]
+    },
+    "rules": {},
+    "rulesDirectory": [],
+    "linterOptions": {
+        "exclude": ["dist", "node_modules"]
+    }
+}
