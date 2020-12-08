@@ -3,10 +3,13 @@ import express, { Request, Response } from 'express'
 import fetch from 'node-fetch'
 import { URL, URLSearchParams } from 'url'
 import { WEATHER_API_URL } from './config'
+import cors from 'cors'
+
 dotenv.config()
 
 const app = express()
 const port = 3001
+app.use(cors())
 
 app.get('/_health', (_: Request, res: Response) => {
     res.send(`up and running on port ${port}`)
