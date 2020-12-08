@@ -2,12 +2,13 @@
     "defaultSeverity": "error",
     "extends": ["tslint:recommended"],
     "jsRules": {
-        "indent": ["error", 4],
-        "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "single"],
-        "semi": ["error", "never"]
+        "quotes": ["error", "single"]
     },
-    "rules": {},
+    "rules": {
+        "indent": [true, "spaces", 4],
+        "quotes": ["error", "single"],
+        "semicolon": [true, "never"]
+    },
     "rulesDirectory": [],
     "linterOptions": {
         "exclude": ["dist", "node_modules"]
