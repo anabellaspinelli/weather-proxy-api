@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 
 app.get('/_health', (_: Request, res: Response) => {
-    res.send(`up and running on port`)
+    res.send(`up and running on port ${process.env.PORT}`)
 })
 
 app.get('/weather', async (req: Request, res: Response, next: NextFunction) => {
