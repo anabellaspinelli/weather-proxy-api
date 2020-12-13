@@ -4,5 +4,5 @@ import { PORT } from './config'
 
 app.listen(PORT, () => {
     // tslint:disable-next-line:no-console
-    console.info(`Example app listening at http://localhost:${PORT}`)
+    console.info(`Listening on port ${PORT}`)
 })
