@@ -6,7 +6,7 @@ import { HistoryQuery } from './types'
 export const getWeatherHistory = async ({ location, period }: HistoryQuery) => {
     const url = new URL(`${WEATHER_API_URL}/history`)
     const params = {
-        aggregateHours: '24',
+        aggregateHours: '1',
         locationMode: 'single',
         period,
         contentType: 'json',
