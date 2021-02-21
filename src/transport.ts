@@ -23,11 +23,15 @@ export const getWeatherHistory = async ({ location, period }: HistoryQuery) => {
     return weatherBody
 }
 
-export const getWeatherComparison = async ({ location, date }: TimelineQuery) => {
+export const getWeatherComparison = async ({
+    location,
+    date,
+}: TimelineQuery) => {
     const url = new URL(`${WEATHER_API_URL}/timeline/${location}/${date}`)
     const params = {
         unitGroup: 'metric',
         key: WEATHER_API_KEY,
+        include: 'obs',
     }
 
     url.search = new URLSearchParams(params as any).toString()

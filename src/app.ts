@@ -22,53 +22,59 @@ app.get('/weather', async (req: Request, res: Response, next: NextFunction) => {
     }
 })
 
-app.get('/weather-comparison', async (req: Request, res: Response, next: NextFunction) => {
-    const { date, location } = req.query as TimelineQuery
+app.get(
+    '/weather-comparison',
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { date: requestedDate, location } = req.query as TimelineQuery
 
-    const dates = queryDates(date)
+        const dates = queryDates(requestedDate)
 
-    let weather: WeatherComparison = {
-        address: '',
-        days: [],
-    }
+        const weather: WeatherComparison = {
+            address: '',
+            days: [],
+        }
 
-    try {
-        for (let date of dates) {
-            const dateWeather = await getWeatherComparison({ location, date })
+        try {
+            for (const date of dates) {
+                const dateWeather = await getWeatherComparison({
+                    location,
+                    date,
+                })
 
-            if (weather.address === '') {
-                weather.address = dateWeather.resolvedAddress
+                if (weather.address === '') {
+                    weather.address = dateWeather.resolvedAddress
+                }
+
+                weather.days.push(parseWeather(dateWeather))
             }
-            
-            weather.days.push(parseWeather(dateWeather))     
-        }   
 
-        res.send(weather)
-    } catch (error) {
-        next(error)
-    }
-})
+            res.send(weather)
+        } catch (error) {
+            next(error)
+        }
+    },
+)
 
 const parseWeather = (weather: any): Day => {
     return {
         datetime: weather.days[0].datetime,
-        temp: weather.days[0].temp
+        temp: weather.days[0].temp,
     }
 }
 
 const queryDates = (date: string) => {
     const dateSplit = date.split('-')
-    
+
     const year = Number(dateSplit[0])
     const month = dateSplit[1]
     const day = dateSplit[2]
 
     return [
-        date, 
-        `${year-10}-${month}-${day}`,
-        `${year-20}-${month}-${day}`,
-        `${year-30}-${month}-${day}`,
-        `${year-40}-${month}-${day}`,
+        date,
+        `${year - 10}-${month}-${day}`,
+        `${year - 20}-${month}-${day}`,
+        `${year - 30}-${month}-${day}`,
+        `${year - 40}-${month}-${day}`,
         `${1973}-${month}-${day}`,
     ]
 }

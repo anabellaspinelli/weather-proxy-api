@@ -10,10 +10,11 @@ export type TimelineQuery = {
 
 export type WeatherComparison = {
     address: string
-    days: Array<Day>
+    days: Day[]
 }
 
 export type Day = {
     datetime: string
     temp: number
+    queryCost?: number
 }
