@@ -40,6 +40,11 @@ app.get(
                     location,
                     date,
                 })
+                if (dateWeather === null) {
+                    res.statusCode = 404
+                    res.send()
+                    return
+                }
 
                 if (weather.address === '') {
                     weather.address = dateWeather.resolvedAddress
