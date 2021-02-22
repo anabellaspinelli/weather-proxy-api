@@ -37,6 +37,10 @@ export const getWeatherComparison = async ({
     url.search = new URLSearchParams(params as any).toString()
 
     const weatherResponse = await fetch(url)
+    if (weatherResponse.status !== 200) {
+        return null
+    }
+
     const weatherBody = await weatherResponse.json()
 
     return weatherBody
