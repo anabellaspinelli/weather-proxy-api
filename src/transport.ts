@@ -2,6 +2,7 @@ import fetch from 'node-fetch'
 import { URL, URLSearchParams } from 'url'
 import { WEATHER_API_KEY, WEATHER_API_URL } from './config'
 import { HistoryQuery, TimelineQuery } from './types'
+const newrelic = require('newrelic')
 
 export const getWeatherHistory = async ({ location, period }: HistoryQuery) => {
     const url = new URL(`${WEATHER_API_URL}/weatherdata/history`)
@@ -42,6 +43,9 @@ export const getWeatherComparison = async ({
     }
 
     const weatherBody = await weatherResponse.json()
+
+    newrelic.incrementMetric('WeatherQuery/Cost', weatherBody.queryCost);
+    newrelic.recordMetric('WeatherQuery/Address', weatherBody.resolvedAddress);
 
     return weatherBody
 }
