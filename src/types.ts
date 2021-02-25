@@ -16,5 +16,7 @@ export type WeatherComparison = {
 export type Day = {
     datetime: string
     temp: number
+    tempmin: number
+    tempmax: number
     queryCost?: number
 }
