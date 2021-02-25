@@ -45,7 +45,9 @@ export const getWeatherComparison = async ({
     const weatherBody = await weatherResponse.json()
 
     newrelic.incrementMetric('WeatherQuery/Cost', weatherBody.queryCost);
-    newrelic.recordMetric('WeatherQuery/Address', weatherBody.resolvedAddress);
+    newrelic.recordCustomEvent('WeatherQuery', {
+        address: weatherBody.address,
+    })
 
     return weatherBody
 }
