@@ -64,6 +64,8 @@ const parseWeather = (weather: any): Day => {
     return {
         datetime: weather.days[0].datetime,
         temp: weather.days[0].temp,
+        tempmin: weather.days[0].tempmin,
+        tempmax: weather.days[0].tempmax,
     }
 }
 
